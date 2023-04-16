@@ -13,6 +13,7 @@ const getCostService = (req, res) => {
 };
 
 const createCostService = (req, res) => {
+  const { date, amount } = req.body;
   return costRepository
     .createCost(req.body)
     .then((insertedCost) => {
