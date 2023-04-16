@@ -4,7 +4,11 @@ const getBalanceService = (req, res) => {
   return balanceRepository
   .getBalance()
   .then((balance) => {
-    if (balance) {
+    if (balance && balance.length > 0) {
+      console.log("actual balance", balance[0].balance);
+      
+      //TODO: update view
+      
       return res.status(200).json(balance);
     }
     return res.status(404).json({ error: 'No balance found' });

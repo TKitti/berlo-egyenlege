@@ -9,6 +9,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname + '/index.html'));
 });
 
+app.get('/create-cost', (req, res) => {
+  res.sendFile(path.join(__dirname + '/views/createCost.html'));
+});
+
 app.get("/costs", getCostService);
 app.post("/costs", createCostService);
 app.get("/balance", getBalanceService);
