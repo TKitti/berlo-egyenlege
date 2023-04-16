@@ -1,6 +1,6 @@
 const costRepository = require('../repositories/cost.repository');
 
-const costService = (req, res) => {
+const getCostService = (req, res) => {
   return costRepository
   .getCosts()
   .then((costs) => {
@@ -12,4 +12,15 @@ const costService = (req, res) => {
     .catch(err => res.status(500).json({ error: err.message }));
 };
 
-module.exports = { costService }
+const createCostService = (req, res) => {
+  return costRepository
+    .createCost(req.body)
+    .then((insertedCost) => {
+      res.status(200).json(insertedCost);
+    })
+    .catch(() => {
+      res.status(500).json({ error: 'Something went wrong, please try again later.' });
+    });
+}
+
+module.exports = { getCostService, createCostService }
