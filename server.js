@@ -3,9 +3,10 @@ const app = express();
 const mongoose = require("mongoose");
 const dotenv = require('dotenv').config({path: __dirname + '/.env'});
 const port = process.env.PORT || 3000;
-const path = require('path');
+const router = require('./routes');
 
 
+// database connection
 mongoose.connect(dotenv.parsed.CONNECTION_STRING, {
   useNewUrlParser: true,
   dbName: 'balance-sheet',
@@ -18,9 +19,8 @@ db.once("open", function () {
 });
 
 
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname + '/index.html'));
-});
+app.use(express.json());
+app.use(router);
 
 app.listen(port, ()=> {
   console.log("listening to the server on http://localhost:3000")
