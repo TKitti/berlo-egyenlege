@@ -27,3 +27,6 @@ app.use(router);
 app.listen(port, ()=> {
   console.log("listening to the server on http://localhost:3000")
 });
+
+
+module.exports = app;
