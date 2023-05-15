@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const mongoose = require("mongoose");
-const dotenv = require('dotenv').config({path: __dirname + '/.env'});
+const dotenv = require('dotenv').config({path: __dirname + '/../.env'});
 const port = process.env.PORT || 3000;
 const router = require('./routes');
 
@@ -23,12 +23,6 @@ db.once("open", function () {
 app.use(cors());
 app.use(express.json());
 app.use(router);
-
-
-app.get("/", (req, res) => {
-  res.send("test");
-});
-
 
 app.listen(port, ()=> {
   console.log("listening to the server on http://localhost:3000")
