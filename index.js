@@ -6,6 +6,8 @@ const dotenv = require('dotenv').config({path: __dirname + '/.env'});
 const port = process.env.PORT || 3000;
 const router = require('./routes');
 
+console.log("conn string: ", dotenv.parsed.CONNECTION_STRING.charAt(5));
+
 
 // database connection
 mongoose.connect(dotenv.parsed.CONNECTION_STRING, {
