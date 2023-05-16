@@ -2,8 +2,8 @@ const express = require('express');
 //const app = express();
 //const path = require('path');
 //const bodyparser = require('body-parser')
-const { getCostService, createCostService } = require('../database/services/cost.service');
-const { getBalanceService } = require('../database/services/balance.service');
+const { getCostService, createCostService } = require('./database/services/cost.service');
+const { getBalanceService } = require('./database/services/balance.service');
 
 
 // Body-parser middleware
