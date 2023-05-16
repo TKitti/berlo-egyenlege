@@ -10,7 +10,7 @@ console.log("conn string: ", process.env.CONNECTION_STRING.charAt(5));
 
 
 // database connection
-mongoose.connect(dotenv.parsed.CONNECTION_STRING, {
+mongoose.connect(process.env.CONNECTION_STRING, {
   useNewUrlParser: true,
   dbName: 'balance-sheet',
 });
