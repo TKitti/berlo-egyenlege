@@ -6,7 +6,7 @@ const dotenv = require('dotenv').config({path: __dirname + '/.env'});
 const port = process.env.PORT || 3000;
 const router = require('./routes');
 
-console.log("conn string: ", dotenv.parsed.CONNECTION_STRING.charAt(5));
+console.log("conn string: ", process.env.CONNECTION_STRING.charAt(5));
 
 
 // database connection
