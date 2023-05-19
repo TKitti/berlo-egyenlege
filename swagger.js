@@ -14,7 +14,8 @@ const options = {
       }
     ]
   },
-  apis: ["routes.js"]
+  apis: ["routes.js"],
+  customCssUrl: '/public/swagger-ui.css'
 }
 
 const swaggerSpecification = swaggerJsDoc(options);

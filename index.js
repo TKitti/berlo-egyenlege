@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const mongoose = require("mongoose");
 const dotenv = require('dotenv').config({path: __dirname + '/.env'});
+const path = require('path');
 const port = process.env.PORT || 3000;
 const router = require('./routes');
 const swaggerUI = require("swagger-ui-express");
@@ -22,6 +23,7 @@ db.once("open", function () {
 });
 
 
+app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecification));
 app.use(cors());
 app.use(express.json());
