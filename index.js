@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const dotenv = require('dotenv').config({path: __dirname + '/.env'});
 const port = process.env.PORT || 3000;
 const router = require('./routes');
+const swaggerUI = require("swagger-ui-express");
+const swaggerSpecification = require('./swagger');
 
 console.log("conn string: ", process.env.CONNECTION_STRING.charAt(5));
 
@@ -22,6 +24,7 @@ db.once("open", function () {
 });
 
 
+app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerSpecification));
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
