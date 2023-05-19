@@ -8,8 +8,6 @@ const router = require('./routes');
 const swaggerUI = require("swagger-ui-express");
 const swaggerSpecification = require('./swagger');
 
-console.log("conn string: ", process.env.CONNECTION_STRING.charAt(5));
-
 
 // database connection
 mongoose.connect(process.env.CONNECTION_STRING, {
