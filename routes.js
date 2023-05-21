@@ -173,7 +173,7 @@ router.post("/cost", createCostService);
  * @swagger
  * /payments:
  *  get:
- *    summary: returns the list of all the payments that the tenant payed
+ *    summary: returns the list of all the payments that the tenant paid
  *    tags: [Payment]
  *    responses:
  *      200:
@@ -194,7 +194,7 @@ router.post("/cost", createCostService);
  * @swagger
  * /payment:
  *  post:
- *    summary: create a new payment that the tenant payed
+ *    summary: create a new payment that the tenant paid
  *    tags: [Payment]
  *    requestBody:
  *      required: true
