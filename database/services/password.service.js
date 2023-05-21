@@ -7,12 +7,17 @@ class WrongPasswordError extends Error {
   }
 }
 
-const hash = (string) => createHash('sha256').update(string).digest('hex')
+const hash = (string) =>
+  createHash('sha256').update(string).digest('hex')
 
-const checkPassword = async ({ password }) => {
+const dbDoesNotContainPassword = ({ passwordFromRequest, passwordsFromDB }) =>
+  !passwordsFromDB.some(pwdFromDb => pwdFromDb.value !== undefined && hash(passwordFromRequest) === pwdFromDb.value)
 
-  const passwords = await passwordRepository.getPasswords()
-  if (!passwords.some(pwdFromDb => pwdFromDb.value !== undefined && hash(password) === pwdFromDb.value)) {
+const checkPassword = async ({ password: passwordFromRequest }) => {
+
+  const passwordsFromDB = await passwordRepository.getPasswords()
+
+  if (dbDoesNotContainPassword({ passwordFromRequest, passwordsFromDB })) {
     throw new WrongPasswordError()
   }
 }
