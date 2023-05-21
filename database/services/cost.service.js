@@ -1,7 +1,7 @@
 const { checkPassword, WrongPasswordError } = require("./password.service")
 const costRepository = require('../repositories/cost.repository')
 
-const getCostService = (req, res) => {
+const getCostsService = (req, res) => {
   return costRepository
     .getCosts()
     .then((costs) => {
@@ -42,4 +42,4 @@ const createCost = (req, res) => {
     })
 }
 
-module.exports = { getCostService, createCostService }
+module.exports = { getCostsService, createCostService }
