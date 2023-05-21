@@ -21,7 +21,7 @@ router.get("/", (req, res) => res.send("backend works"));
  *        balance:
  *          type: number
  *          description: the current balance of the tenant
- * 
+ *
  *    Cost:
  *      type: object
  *      required:
@@ -46,7 +46,7 @@ router.get("/", (req, res) => res.send("backend works"));
  *      type: array
  *      items:
  *      -  $ref: '#/components/schemas/Cost'
- * 
+ *
  *    Payment:
  *      type: object
  *      required:
@@ -71,7 +71,7 @@ router.get("/", (req, res) => res.send("backend works"));
 
 *      items:
  *      -  $ref: '#/components/schemas/Payment'
- * 
+ *
  */
 
 
