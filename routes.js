@@ -69,8 +69,7 @@ router.get("/", (req, res) => res.send("backend works"));
  *            example: 19000
  *    Payments:
  *      type: array
-
-*      items:
+ *      items:
  *      -  $ref: '#/components/schemas/Payment'
  *
  */
@@ -203,7 +202,7 @@ router.get("/payments", getPaymentsService);
  *      content:
  *        application/json:
  *          schema:
- *             type: object
+ *            type: object
  *            properties:
  *              password:
  *                type: string
