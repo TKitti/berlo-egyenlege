@@ -1,25 +1,19 @@
 const { createHash } = require('crypto')
 const passwordRepository = require('../repositories/password.repository')
 
-class WrongPasswordError extends Error {
-  constructor() {
-    super("Wrong password.")
-  }
-}
-
 const hash = (string) =>
   createHash('sha256').update(string).digest('hex')
 
-const dbDoesNotContainPassword = ({ passwordFromRequest, passwordsFromDB }) =>
-  !passwordsFromDB.some(pwdFromDb => pwdFromDb.value !== undefined && hash(passwordFromRequest) === pwdFromDb.value)
+const isPasswordAccepted = (passwordFromRequest, passwordsFromDB) =>
+  passwordFromRequest && passwordsFromDB && passwordsFromDB.some(pwdFromDb => pwdFromDb.value && hash(passwordFromRequest) === pwdFromDb.value)
 
-const checkPassword = async ({ password: passwordFromRequest }) => {
+const checkPassword = async (passwordFromRequest) => {
 
   const passwordsFromDB = await passwordRepository.getPasswords()
 
-  if (dbDoesNotContainPassword({ passwordFromRequest, passwordsFromDB })) {
-    throw new WrongPasswordError()
+  if (!isPasswordAccepted(passwordFromRequest, passwordsFromDB)) {
+    throw new Error("Wrong password.")
   }
 }
 
-module.exports = { checkPassword, WrongPasswordError }
+module.exports = { checkPassword }

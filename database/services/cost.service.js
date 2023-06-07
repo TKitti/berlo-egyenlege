@@ -2,7 +2,7 @@ const { checkPassword, WrongPasswordError } = require("./password.service")
 const costRepository = require('../repositories/cost.repository')
 const { addToBalance } = require('../repositories/balance.repository')
 
-const getCostsService = (req, res) => {
+const getCostsService = (_, res) => {
   return costRepository
     .getCosts()
     .then((costs) => {
@@ -16,34 +16,36 @@ const getCostsService = (req, res) => {
 
 const createCostService = (req, res) => {
 
-  checkPassword(req.body, res)
-    .then((_) => createCost(req, res))
+  checkPassword(req.body.password)
+    .then((_) => createCost(req.body.cost, res))
     .catch(error => {
-      if (error instanceof WrongPasswordError) {
+      if (error.message === "Wrong password.") {
         console.error("Creating the cost was not possible, due to: " + error.message)
-        return res.status(403).json({ error: 'Something went wrong, please try again later.' })
-
-      } else {
-        throw error
+        return res.status(403).json({ error: error.message })
       }
+      console.error("ERROR:", error.message)
+      return res.status(500).json({ error: error.message })
     })
 }
 
-const createCost = (req, res) => {
+const createCost = (cost, res) => {
+  if (cost === undefined) throw new Error("Mandatory cost is missing!")
+  if (cost.amount === undefined) throw new Error("Mandatory cost.amount is missing!")
 
   costRepository
-    .createCost(req.body)
+    .createCost(cost)
     .then((insertedCost) => {
 
       if (insertedCost) {
-        addToBalance(-req.body.amount)
+        addToBalance(-cost.amount)
           .catch(e => { throw e })
 
-        return res.status(201)
+        return res.status(201).end()
       }
       return res.status(404).json({ error: 'No cost was created' })
     })
     .catch((error) => {
+      console.error("ERROR:", error)
       return res.status(500).json({ error: 'Something went wrong, please try again later.' })
     })
 }

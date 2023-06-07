@@ -1,13 +1,11 @@
 const balanceRepository = require('../repositories/balance.repository');
 
-const getBalanceService = (req, res) => {
+const getBalanceService = (_, res) => {
   return balanceRepository
     .getBalance()
     .then((balance) => {
       if (balance && balance.length > 0) {
         console.log("actual balance", balance[0].balance);
-
-        //TODO: update view
 
         return res.status(200).json(balance);
       }
