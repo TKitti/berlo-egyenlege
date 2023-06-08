@@ -29,7 +29,7 @@ const createCostService = (req, res) => {
 }
 
 const createCost = (cost, res) => {
-  if (cost === undefined) throw new Error("Mandatory cost is missing!")
+  if (!cost) throw new Error("Mandatory cost is missing!")
   if (cost.amount === undefined) throw new Error("Mandatory cost.amount is missing!")
 
   costRepository

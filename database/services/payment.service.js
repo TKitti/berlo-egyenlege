@@ -29,7 +29,7 @@ const createPaymentService = (req, res) => {
 }
 
 const createPayment = (payment, res) => {
-  if (payment === undefined) throw new Error("Mandatory payment is missing!")
+  if (!payment) throw new Error("Mandatory payment is missing!")
   if (payment.amount === undefined) throw new Error("Mandatory payment.amount is missing!")
 
   paymentRepository
