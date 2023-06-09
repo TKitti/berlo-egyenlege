@@ -1,6 +1,7 @@
 const express = require('express');
-const { getCostService, createCostService } = require('./database/services/cost.service');
-const { getBalanceService, updateBalanceService } = require('./database/services/balance.service');
+const { getCostsService, createCostService } = require('./database/services/cost.service');
+const { getPaymentsService, createPaymentService } = require('./database/services/payment.service');
+const { getBalanceService } = require('./database/services/balance.service');
 const router = express.Router();
 
 router.get("/", (req, res) => res.send("backend works"));
@@ -21,7 +22,7 @@ router.get("/", (req, res) => res.send("backend works"));
  *        balance:
  *          type: number
  *          description: the current balance of the tenant
- * 
+ *
  *    Cost:
  *      type: object
  *      required:
@@ -46,7 +47,7 @@ router.get("/", (req, res) => res.send("backend works"));
  *      type: array
  *      items:
  *      -  $ref: '#/components/schemas/Cost'
- * 
+ *
  *    Payment:
  *      type: object
  *      required:
@@ -68,10 +69,9 @@ router.get("/", (req, res) => res.send("backend works"));
  *            example: 19000
  *    Payments:
  *      type: array
-
-*      items:
+ *      items:
  *      -  $ref: '#/components/schemas/Payment'
- * 
+ *
  */
 
 
@@ -86,6 +86,7 @@ router.get("/", (req, res) => res.send("backend works"));
  * tags:
  *  name: Balance
  */
+
 
 /**
  * @swagger
@@ -105,14 +106,13 @@ router.get("/", (req, res) => res.send("backend works"));
  */
 router.get("/balance", getBalanceService);
 
-// TODO: this is not required, we'll recalculate the balance from POST cost and POST payment
-router.put("/balance", updateBalanceService);
 
 /**
  * @swagger
  * tags:
  *  name: Cost
  */
+
 
 /**
  * @swagger
@@ -132,7 +132,7 @@ router.put("/balance", updateBalanceService);
  *      500:
  *        description: something went wrong
  */
-router.get("/costs", getCostService);
+router.get("/costs", getCostsService);
 
 
 /**
@@ -169,6 +169,7 @@ router.post("/cost", createCostService);
  *  name: Payment
  */
 
+
 /**
  * @swagger
  * /payments:
@@ -187,7 +188,7 @@ router.post("/cost", createCostService);
  *      500:
  *        description: something went wrong
  */
-// TODO: implement it
+router.get("/payments", getPaymentsService);
 
 
 /**
@@ -201,7 +202,7 @@ router.post("/cost", createCostService);
  *      content:
  *        application/json:
  *          schema:
- *             type: object
+ *            type: object
  *            properties:
  *              password:
  *                type: string
@@ -215,7 +216,7 @@ router.post("/cost", createCostService);
  *      500:
  *        description: something went wrong
  */
-// TODO: implement it
+router.post("/payment", createPaymentService);
 
 
 module.exports = router;
