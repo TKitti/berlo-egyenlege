@@ -34,10 +34,10 @@ router.get("/", (req, res) => res.send("backend works"));
  *            description: the auto-generated id of the cost
  *            example: "643be91656cf8315c5f37002"
  *          date:
- *            type: date
- *            description: the year and the month of the cost
- *            pattern: /([0-9]{4})-(?:[0-9]{2})/
- *            example: "2023-04"
+ *            type: number
+ *            description: epoch / unix time of the data
+ *            pattern: ([0-9]+)
+ *            example: 1234567890
  *          amount:
  *            type: number
  *            description: the amount that the tenant has to pay
@@ -59,10 +59,10 @@ router.get("/", (req, res) => res.send("backend works"));
  *            description: the auto-generated id of the cost
  *            example: "643bc54df94f86271666150d"
  *          date:
- *            type: date
- *            description: the date when the tenant paid
- *            pattern: /([0-9]{4})-(?:[0-9]{2})-([0-9]{2})/
- *            example: "2023-04-17"
+ *            type: number
+ *            description: epoch / unix time of the data
+ *            pattern: ([0-9]+)
+ *            example: 1234567890
  *          amount:
  *            type: number
  *            description: the amount that the tenant paid
@@ -157,6 +157,8 @@ router.get("/costs", getCostsService);
  *        description: the cost was successfully created
  *      403:
  *        description: access denied
+ *      422:
+ *        description: input validation error
  *      500:
  *        description: something went wrong
  */
@@ -213,6 +215,8 @@ router.get("/payments", getPaymentsService);
  *        description: the payment was successfully created
  *      403:
  *        description: access denied
+ *      422:
+ *        description: input validation error
  *      500:
  *        description: something went wrong
  */
