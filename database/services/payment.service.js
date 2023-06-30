@@ -1,6 +1,7 @@
-const { checkPassword, WrongPasswordError } = require("./password.service")
+const { checkPassword } = require("./password.service")
 const paymentRepository = require('../repositories/payment.repository')
 const { addToBalance } = require('../repositories/balance.repository')
+const { validate } = require("../../validators")
 
 const getPaymentsService = (_, res) => {
   return paymentRepository
@@ -15,6 +16,7 @@ const getPaymentsService = (_, res) => {
 }
 
 const createPaymentService = (req, res) => {
+  validate("Payment", req.body.payment)
 
   checkPassword(req.body.password)
     .then((_) => createPayment(req.body.payment, res))
