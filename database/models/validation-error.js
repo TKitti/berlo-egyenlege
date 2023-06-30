@@ -1,9 +1,6 @@
 module.exports = class ValidationError extends Error {
-  constructor(message = 'Validation Error', statusCode = 422, innerError = null) {
+  constructor(message = 'Validation Error', statusCode = 422) {
     super(message)
-    if (innerError && innerError.stack) {
-      super.stack = innerError.stack;
-    }
     this.statusCode = statusCode;
   }
 };
