@@ -100,7 +100,14 @@ router.get("/", (req, res) => res.send("backend works"));
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/components/schemas/Balance'
+ *              type: object
+ *              properties:
+ *                balance:
+ *                  $ref: '#/components/schemas/Balance'
+ *                hasCalculationError:
+ *                  type: boolean
+ *      404:
+ *        description: no costs or payments were found in the database
  *      500:
  *        description: something went wrong
  */
